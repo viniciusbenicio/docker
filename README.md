@@ -117,3 +117,51 @@ docker rm 6bd1b73d1d9c
 ```docker
 docker run -it ubuntu bash
 ```
+## Mapeando Portas
+
+Para mapear portas ao executar um container, você pode utilizar a opção `-p` ou `-P`. A opção `-p` permite mapear uma porta específica no host para uma porta específica no container.
+
+### Exemplo de criação com mapeamento de porta automático:
+
+```docker
+# Criando com mapeamento da porta
+docker run -d -P dockersamples/static-site
+
+docker ps
+```
+
+Resultado:
+
+```
+CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS         PORTS                                               NAMES
+9a4a24aa8d10   dockersamples/static-site "/bin/sh -c 'cd /usr…"   58 seconds ago  Up 57 seconds  0.0.0.0:32769->80/tcp, 0.0.0.0:32768->443/tcp   serene_hoover
+```
+
+Para verificar o mapeamento de porta:
+
+```docker
+# Mostrando o mapeamento de porta 
+docker port 9a4a24aa8d10
+```
+
+Resultado:
+
+```
+80/tcp -> 0.0.0.0:32769
+443/tcp -> 0.0.0.0:32768
+```
+
+![Port Mapping](https://github.com/viniciusbenicio/docker/assets/63131764/36865ef9-b87f-4d7c-9047-9897d02c0f11)
+
+
+### Exemplo de criação com mapeamento de porta manual:
+
+```docker
+# O parâmetro p deve ser minúsculo, -p seguido pela porta desejada (8080 no exemplo)
+docker run -d -p 8080:80 dockersamples/static-site
+```
+
+![Port Mapping Manual](https://github.com/viniciusbenicio/docker/assets/63131764/cc24d22a-02f6-43c8-9957-4fd134ce51ac)
+
+
+Lembre-se de ajustar as portas conforme necessário para atender aos requisitos do seu ambiente.
