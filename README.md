@@ -240,3 +240,31 @@ docker run -d -p 8080:3000 viniciusbenicio/app-node:1.0
 ```
 
 ![Untitled 1](https://github.com/viniciusbenicio/docker/assets/63131764/416d5b93-3703-4197-af54-95cbbb065ee9)
+
+## Incrementando a imagem
+
+```docker
+# Deixando explicito a porta que aplicação está ou deve rodar
+
+FROM node:14
+WORKDIR /app-node
+EXPOSE 3000
+COPY . .
+RUN npm install
+ENTRYPOINT npm start
+
+# Alteramos o Dockerfile agora devemos gerar uma nova build da imagem 
+
+docker build -t viniciusbenicio/app-node:1.1 .
+
+# Definindo variaveis de ambiente para definir porta para construir a imagem e env para o 
+# container, assim sendo possível definir portas no build da imagem
+
+FROM node:14
+WORKDIR /app-node
+ARG PORT_BUILD=6000
+ENV PORT=$PORT_BUILD
+EXPOSE $PORT_BUILD
+RUN npm install
+ENTRYPOINT npm start
+```
