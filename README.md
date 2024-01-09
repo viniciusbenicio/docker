@@ -202,3 +202,40 @@ IMAGE          CREATED        CREATED BY                                      SI
 <missing>      6 months ago   /bin/sh -c #(nop)  ARG RELEASE                  0B
 
 ```
+## Criando uma imagem
+
+Seguir um processo conforme imagem 
+
+![Untitled](Docker%201d07e06972bc49c5b90858783dca76cc/Untitled.png)
+
+```docker
+# Definindo a versão do NODE para 14, Informando diretorio padrão /app-node e rodando o npm install e em seguida npm start após que container for criado
+
+FROM node:14
+WORKDIR /app-node
+COPY . .
+RUN npm install
+ENTRYPOINT npm start
+
+```
+
+[Dockerfile](Docker%201d07e06972bc49c5b90858783dca76cc/Dockerfile.txt)
+
+```docker
+# Parti do Dockerfile acima podemos gerar nossa imagem
+
+docker build -t viniciusbenicio/app-node:1.0 .
+
+# Verificando a criação da imagem
+
+docker images
+REPOSITORY                       TAG       IMAGE ID       CREATED              SIZE
+viniciusbenicio/app-node         1.0       7ea93548f0bf   About a minute ago   914MB
+
+# Rodando a imagem 
+docker run -d -p 8080:3000 viniciusbenicio/app-node:1.0
+
+3477fd1f8c1e7180fac8609759fb6fe4e1c4ed14d4b1a4df0842dca823cfb400
+```
+
+![Untitled](Docker%201d07e06972bc49c5b90858783dca76cc/Untitled%201.png)
