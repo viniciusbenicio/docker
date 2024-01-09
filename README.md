@@ -163,5 +163,42 @@ docker run -d -p 8080:80 dockersamples/static-site
 
 ![Port Mapping Manual](https://github.com/viniciusbenicio/docker/assets/63131764/cc24d22a-02f6-43c8-9957-4fd134ce51ac)
 
+## Imagens
 
-Lembre-se de ajustar as portas conforme necessário para atender aos requisitos do seu ambiente.
+Uma imagem é nada mais que um conjuto de camadas quando juntamos formamos uma imagem, cada imagem tem seu identificador.
+
+```docker
+# Verificando as imagem baixadas
+
+docker images
+
+REPOSITORY                       TAG       IMAGE ID       CREATED        SIZE
+mcr.microsoft.com/mssql/server   latest    683d523cd395   5 months ago   2.9GB
+
+# Pode utilizar inspect para especionar informações detalhada da imagem passando o id da imagem
+# depois do Inspect
+
+docker inspect 683d523cd395
+
+# Podemos utilizar docker history para verificar as camada que formam a imagem do docker
+
+docker history 683d523cd395
+IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
+683d523cd395   5 months ago   /bin/sh -c #(nop)  CMD ["/opt/mssql/bin/sqls…   0B
+<missing>      5 months ago   /bin/sh -c #(nop)  ENTRYPOINT ["/opt/mssql/b…   0B
+<missing>      5 months ago   /bin/sh -c #(nop)  USER mssql                   0B
+<missing>      5 months ago   /bin/sh -c EXTRA_APT_PACKAGES="" /tmp/instal…   178MB
+<missing>      5 months ago   /bin/sh -c tar -h -xf install.tar               1.33GB
+<missing>      5 months ago   /bin/sh -c #(nop) COPY file:1fb15b06393b36bc…   1.33GB
+<missing>      5 months ago   /bin/sh -c #(nop)  ENV CONFIG_EDGE_BUILD=       0B
+<missing>      5 months ago   /bin/sh -c #(nop)  ENV MSSQL_RPC_PORT=135       0B
+<missing>      5 months ago   /bin/sh -c #(nop)  EXPOSE 1433                  0B
+<missing>      5 months ago   /bin/sh -c #(nop)  LABEL vendor=Microsoft co…   0B
+<missing>      6 months ago   /bin/sh -c #(nop)  CMD ["/bin/bash"]            0B
+<missing>      6 months ago   /bin/sh -c #(nop) ADD file:12f97b7b044d0d116…   72.8MB
+<missing>      6 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+<missing>      6 months ago   /bin/sh -c #(nop)  LABEL org.opencontainers.…   0B
+<missing>      6 months ago   /bin/sh -c #(nop)  ARG LAUNCHPAD_BUILD_ARCH     0B
+<missing>      6 months ago   /bin/sh -c #(nop)  ARG RELEASE                  0B
+
+```
