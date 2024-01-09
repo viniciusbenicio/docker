@@ -206,7 +206,8 @@ IMAGE          CREATED        CREATED BY                                      SI
 
 Seguir um processo conforme imagem 
 
-![Untitled](Docker%201d07e06972bc49c5b90858783dca76cc/Untitled.png)
+![Untitled](https://github.com/viniciusbenicio/docker/assets/63131764/280385fc-97a7-41c6-88b5-2598054f6182)
+
 
 ```docker
 # Definindo a versão do NODE para 14, Informando diretorio padrão /app-node e rodando o npm install e em seguida npm start após que container for criado
@@ -219,7 +220,7 @@ ENTRYPOINT npm start
 
 ```
 
-[Dockerfile](Docker%201d07e06972bc49c5b90858783dca76cc/Dockerfile.txt)
+[[Dockerfile](Docker%201d07e06972bc49c5b90858783dca76cc/Dockerfile.txt)](https://github.com/viniciusbenicio/docker/blob/main/app-exemplo/Dockerfile)
 
 ```docker
 # Parti do Dockerfile acima podemos gerar nossa imagem
@@ -238,4 +239,4 @@ docker run -d -p 8080:3000 viniciusbenicio/app-node:1.0
 3477fd1f8c1e7180fac8609759fb6fe4e1c4ed14d4b1a4df0842dca823cfb400
 ```
 
-![Untitled](Docker%201d07e06972bc49c5b90858783dca76cc/Untitled%201.png)
+![Untitled 1](https://github.com/viniciusbenicio/docker/assets/63131764/416d5b93-3703-4197-af54-95cbbb065ee9)
