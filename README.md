@@ -268,3 +268,50 @@ EXPOSE $PORT_BUILD
 RUN npm install
 ENTRYPOINT npm start
 ```
+## Subindo imagem para DockerHUB
+
+### 
+
+```docker
+# Realizar login no CLI do docker
+
+docker login -u seulogin
+# em seguida irá solicitar sua senha após digitar seu login do Docker HUB
+Password:
+
+# Após autenticar irá ver a seguinte mensagem
+#Login Succeeded
+#Logging in with your password grants your terminal complete access to your account.
+#For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+
+# Para subir a imagem digite os comando seguintes
+
+# para verificar suas imagens
+docker images
+
+REPOSITORY                       TAG       IMAGE ID       CREATED        SIZE
+viniciusbenicio/app-node         1.2       94eb56b99b56   22 hours ago   912MB
+viniciusbenicio/app-node         1.1       0c3703f3b4fc   22 hours ago   912MB
+viniciusbenicio/app-node         1.0       7ea93548f0bf   23 hours ago   914MB
+
+# Com a imagem que deseja subir no Docker HUB faça o seguinte
+
+docker push viniciusbenicio/app-node:1.0
+
+The push refers to repository [docker.io/viniciusbenicio/app-node]
+95effa81783b: Pushed
+ad500a08f940: Pushed
+80b7027d7837: Pushed
+0d5f5a015e5d: Mounted from library/node
+3c777d951de2: Mounted from library/node
+f8a91dd5fc84: Mounted from library/node
+cb81227abde5: Mounted from library/node
+e01a454893a9: Mounted from library/node
+c45660adde37: Mounted from library/node
+fe0fb3ab4a0f: Mounted from library/node
+f1186e5061f2: Mounted from library/node
+b2dba7477754: Mounted from library/node
+1.0: digest: sha256:c0dc6db3ab8fed30eb7d1eb9c9706bd23bbf6527726bb69671e0b0f19a6cfa8d size: 2840
+```
+
+Link da imagem no DockerHUB https://hub.docker.com/repository/docker/viniciusbenicio/app-node/general
