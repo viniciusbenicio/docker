@@ -315,3 +315,42 @@ b2dba7477754: Mounted from library/node
 ```
 
 Link da imagem no DockerHUB https://hub.docker.com/repository/docker/viniciusbenicio/app-node/general
+
+## Bind mounts
+
+Bind mounts são um **mecanismo de compartilhamento de arquivos do host com o contêiner**.
+
+```docker
+# Utilizando um volume do meu host para o docker
+
+docker run -it -v D:\Projetos\Pessoal\docker\docker\volume:/app ubuntu bash
+
+# Criado o repositorio app
+root@81f003098c72:/# ls
+app  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@81f003098c72:/# cd app
+
+# Criando um arquivo 
+root@81f003098c72:/app# touch arquivo.txt
+
+root@81f003098c72:/app# ls
+arquivo.txt
+```
+
+![image](https://github.com/viniciusbenicio/docker/assets/63131764/49067a0b-21a2-4d28-b405-897af0eca474)
+
+## Bind mounts (+Semântico) 
+
+Outra maneira também de criar o Container mapeando um host
+
+```docker
+docker run -it --mount type=bind,source=D:\Projetos\Pessoal\docker\docker\volume,target=/app ubuntu bash
+
+root@dc22456979e5:/# ls
+app  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@dc22456979e5:/# cd app
+root@dc22456979e5:/app# ls
+arquivo.txt
+```
+
