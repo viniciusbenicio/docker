@@ -354,3 +354,73 @@ root@dc22456979e5:/app# ls
 arquivo.txt
 ```
 
+## Utilizando Volumes
+
+Essa é a maneira mais recomendada de utilizar, segundo a documentação do Docker  
+
+[Volumes](https://docs.docker.com/storage/volumes/)
+
+```docker
+# Verificando os volumes
+
+docker volume ls
+DRIVER    VOLUME NAME
+
+# Criando um volume
+
+docker volume create meu-volume
+
+# Volume criado
+meu-volume
+
+# Criando um Container e ja mapeando nosso volume criado
+
+docker run -it -v meu-volume/app ubuntu bash
+
+root@a2503ed65504:/# ls
+app  bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+root@a2503ed65504:/# cd app
+
+# Criando um arquivo no volume
+
+root@a2503ed65504:/app# touch arquivo.txt
+
+# Verificando o arquivo
+
+root@a2503ed65504:/app# ls
+arquivo.txt
+
+# Mas aonde está o arquivo?
+
+cd \\wsl$\docker-desktop-data\data\docker\volumes
+
+ls
+
+Directory: \\wsl$\docker-desktop-data\data\docker\volumes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----          1/9/2024   9:40 PM                5f58af0a26c53a1ba90722ca71d8c3a43e3c05199358c7abbd0279b41cb16d41
+d-----          1/9/2024   9:38 PM                meu-volume
+------          1/9/2024   9:40 PM          32768 metadata.db
+-----l          1/9/2024   8:39 PM              0 backingFsBlockDev
+
+Directory: \\wsl$\docker-desktop-data\data\docker\volumes\meu-volume\_data
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+------          1/9/2024   9:41 PM              0 arquivo.txt
+```
+
+## Utilizando Volumes - Outra maneira de criar um volume
+
+```docker
+docker run -it --mount source=meu-volume,target=/app ubuntu bash
+
+docker volume ls
+DRIVER    VOLUME NAME
+local     5f58af0a26c53a1ba90722ca71d8c3a43e3c05199358c7abbd0279b41cb16d41
+local     meu-volume
+```
+
