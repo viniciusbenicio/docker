@@ -1115,3 +1115,33 @@ docker run -d --network minha-bridge --name meu-mongo mongo:4.4.6
 docker run -d --network minha-bridge --name alurabooks -p 3000:3000 aluradocker/alura-books:1.0
 2ef17c09cc18ab4dde72245fd9558411d3e08dfdc976f92495a89fe3ecb396c8
 ```
+
+## Conhecendo Docker Compose
+
+```docker
+# Crie um arquivo docker.compose.yml com as seguintes informações
+
+version: "3.9"
+services: 
+  mongodb:
+    image: mongo:4.4.6
+    container_name: meu-mongo
+    networks:
+      - compose-bridge
+
+  alurabooks:
+    image: aluradocker/alura-books:1.0
+    container_name: alurabooks
+    networks:
+      - compose-bridge
+    ports:
+      - 3000:3000
+
+networks:
+  compose-bridge:
+    driver: bridge
+
+# E navegue até a onde esta o arquivo e execute
+
+docker-compose up
+```
