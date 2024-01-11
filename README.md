@@ -642,3 +642,37 @@ docker inspect 34305d7460d0
     }
 ]
 ```
+## Criando uma rede bridge
+
+Comunicando os dois Container via Hostname ubuntu01 - ubuntu02
+
+```docker
+docker run -it --name ubuntu01 --network minha-bridge ubuntu bash
+
+docker network create --driver bridge minha-bridge
+cc2c8bd06ff45c782e9923ac5b81f596faa25993f73fc3bb0d85a68206ae75e8
+
+docker run -d --name ubuntu02 --network minha-bridge ubuntu sleep 1d
+5717dd96a89b909f6d73f34715eea10791fa4b65da97297788f483837925b5d1
+
+# atualizar o ubuntu 
+
+root@3abe5b77246a:/# apt-get update
+
+# instalando pacote para realizar ping
+root@3abe5b77246a:/# apt-get install iputils-ping -y
+
+root@3abe5b77246a:/# ping ubuntu02
+PING ubuntu02 (172.18.0.3) 56(84) bytes of data.
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=1 ttl=64 time=0.043 ms
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=2 ttl=64 time=0.032 ms
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=3 ttl=64 time=0.034 ms
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=4 ttl=64 time=0.040 ms
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=5 ttl=64 time=0.033 ms
+64 bytes from ubuntu02.minha-bridge (172.18.0.3): icmp_seq=6 ttl=64 time=0.034 ms
+^C
+--- ubuntu02 ping statistics ---
+6 packets transmitted, 6 received, 0% packet loss, time 5170ms
+rtt min/avg/max/mdev = 0.032/0.036/0.043/0.004 ms
+root@3abe5b77246a:/#
+```
