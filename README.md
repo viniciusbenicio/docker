@@ -1097,3 +1097,21 @@ docker inspect f614a7aedd7d
     }
 ]
 ```
+## Comunicando aplicação e banco
+
+Exemplo pratico
+
+```docker
+# Baixando as imagem necessárias
+
+docker pull mongo:4.4.6
+docker pull aluradocker/alura-books:1.0
+
+# Iniciando o banco de dados mongo na rede bridge criada
+
+docker run -d --network minha-bridge --name meu-mongo mongo:4.4.6
+78b0e8a341e5e479e21f6cb4840beca07e402558b3268b0041661522090736e5
+
+docker run -d --network minha-bridge --name alurabooks -p 3000:3000 aluradocker/alura-books:1.0
+2ef17c09cc18ab4dde72245fd9558411d3e08dfdc976f92495a89fe3ecb396c8
+```
