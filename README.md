@@ -1136,6 +1136,8 @@ services:
       - compose-bridge
     ports:
       - 3000:3000
+    depends_on:
+      - mongodb
 
 networks:
   compose-bridge:
